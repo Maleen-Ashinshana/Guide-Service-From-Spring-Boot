@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class Main {
     @Bean
-    public ModelMapper VehiclemodelMapper(){
+    public ModelMapper modelMapper(){
         return new ModelMapper();
     }
 
