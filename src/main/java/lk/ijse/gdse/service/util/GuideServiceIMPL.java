@@ -3,6 +3,7 @@ package lk.ijse.gdse.service.util;
 
 import lk.ijse.gdse.dto.GuiderDTO;
 import lk.ijse.gdse.entity.GuideEntity;
+import lk.ijse.gdse.exception.NotFoundException;
 import lk.ijse.gdse.repo.GuideRepo;
 import lk.ijse.gdse.service.GuideService;
 import lk.ijse.gdse.util.Converter;
@@ -28,27 +29,41 @@ public class GuideServiceIMPL implements GuideService {
 
     @Override
     public GuiderDTO getGuide(String guide_id) {
-    return converter.toGuiderDTO(guideRepo.findById(guide_id).get());
+        Optional<GuideEntity> byId = guideRepo.findById(guide_id);
+        if (!byId.isPresent()){
+            throw new NotFoundException( "Guide ID :"+guide_id + " Not Found");
+        }
+        return converter.toGuiderDTO(byId.get());
         //return  converter.toGuiderDTO(guideRepo.findAllById(guide_id).get());
         //return converter.toGuiderDTO(guideRepo.findAllById(guide_id).);
     }
 
     @Override
-    public void updateGuide(GuiderDTO guiderDTO) {
-        Optional<GuideEntity> guideEntity=guideRepo.findById(guiderDTO.getGuide_id());
+    public void updateGuide(String guide_id,GuiderDTO guiderDTO) {
+        Optional<GuideEntity> guideEntity=guideRepo.findById(guide_id);
         if (!guideEntity.isPresent()){
-            guideEntity.get().setGuide_name(guiderDTO.getGuide_name());
-            guideEntity.get().setAddress(guiderDTO.getAddress());
-            guideEntity.get().setAge(guiderDTO.getAge());
-            guideEntity.get().setContact_number(guiderDTO.getContact_number());
-            guideEntity.get().setGender(guiderDTO.getGender());
-            guideEntity.get().setProfile_picture(guiderDTO.getProfile_picture());
+
+            throw  new NotFoundException("Guide ID :" +guide_id+"Not Found");
+
         }
+        GuideEntity guide=guideEntity.get();
+        guide.setGuide_name(guiderDTO.getGuide_name());
+        guide.setAddress(guiderDTO.getAddress());
+        guide.setAge(guiderDTO.getAge());
+        guide.setContact_number(guiderDTO.getContact_number());
+        guide.setGender(guiderDTO.getGender());
+        guide.setProfile_picture(guiderDTO.getProfile_picture());
+
+        guideRepo.save(guide);
 
     }
 
     @Override
     public void deleteGuide(String guide_id) {
-    guideRepo.deleteById(guide_id);
+        Optional<GuideEntity> byId = guideRepo.findById(guide_id);
+        if (!byId.isPresent()){
+            throw new NotFoundException("Guide ID : "+guide_id+"Not Found");
+        }
+        guideRepo.deleteById(guide_id);
     }
 }
