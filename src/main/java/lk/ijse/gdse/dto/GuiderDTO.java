@@ -1,6 +1,8 @@
 package lk.ijse.gdse.dto;
 
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Lob;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
 import jakarta.validation.constraints.Pattern;
@@ -10,7 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.util.List;
-
+@AllArgsConstructor
 @NoArgsConstructor
 @Data
 @ToString
@@ -23,23 +25,25 @@ public class GuiderDTO {
     @NotNull(message = "Guide Address cannot be empty")
     private String address;
     @NotNull(message = "Guide Age cannot be empty")
-    private int age;
+    private String age;
     @NotNull(message = "Guide Contact Number cannot be empty")
-    private int contact_number;
+    private String contact_number;
     @NotNull(message = "Guide Gender cannot be empty")
     private String gender;
+    @NotNull(message = "Guide experience cannot be empty")
+    private String experience;
+    @NotNull(message = "Guide Man day Value cannot be empty")
+    private double man_day_value;
+    @NotNull(message = "Guide remark cannot be empty")
+    private String  remark;
     @NotNull(message = "Guide Profile Picture cannot be empty")
     private String profile_picture;
+    @NotNull(message = "Guide Nic Image cannot be empty")
+    private String guide_nic_image;
+    @NotNull(message = "Guide ID Picture cannot be empty")
+    private String guide_id_image;
 
 /*    private List<MainTravelServiceEntity> mainTravelServiceEntities;*/
 
-    public GuiderDTO(String guide_id, String guide_name, String address, int age, int contact_number, String gender, String profile_picture) {
-        this.guide_id = guide_id;
-        this.guide_name = guide_name;
-        this.address = address;
-        this.age = age;
-        this.contact_number = contact_number;
-        this.gender = gender;
-        this.profile_picture = profile_picture;
-    }
+
 }

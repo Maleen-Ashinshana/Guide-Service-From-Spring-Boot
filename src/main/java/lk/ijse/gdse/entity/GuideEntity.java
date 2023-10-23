@@ -10,7 +10,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
-@Document
+
+@AllArgsConstructor
 //@AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -23,24 +24,25 @@ public class GuideEntity implements SuperEntity {
     @Column(nullable = false)
     private String address;
     @Column(nullable = false)
-    private int age;
+    private String age;
     @Column(nullable = false)
-    private int contact_number;
+    private String contact_number;
     @Column(nullable = false)
     private String gender;
+    @Column(nullable = false)
+    private String experience;
+    @Column(nullable = false)
+    private double man_day_value;
+    @Column(nullable = false)
+    private String  remark;
     @Lob
     @Column(nullable = false,columnDefinition = "LONGTEXT")
     private String profile_picture;
-   /* @OneToMany(mappedBy = "guide")
-    private List<MainTravelServiceEntity> mainTravelServiceEntities;*/
+    @Lob
+    @Column(nullable = false,columnDefinition = "LONGTEXT")
+    private String guide_nic_image;
+    @Lob
+    @Column(nullable = false,columnDefinition = "LONGTEXT")
+    private String guide_id_image;
 
-    public GuideEntity(String guide_id, String guide_name, String address, int age, int contact_number, String gender, String profile_picture) {
-        this.guide_id = guide_id;
-        this.guide_name = guide_name;
-        this.address = address;
-        this.age = age;
-        this.contact_number = contact_number;
-        this.gender = gender;
-        this.profile_picture = profile_picture;
-    }
 }

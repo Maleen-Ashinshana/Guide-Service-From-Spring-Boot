@@ -23,26 +23,39 @@ public class GuideController {
     }
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
-    GuiderDTO saveGuide(
+    public GuiderDTO saveGuide(@Valid
             @RequestPart String guide_name,
             @RequestPart String guide_address,
-            @RequestPart int age,
-            @RequestPart int contact_number,
+            @RequestPart String age,
+            @RequestPart String contact_number,
             @RequestPart String gender,
-            @RequestPart byte[] guide_image
-
+            @RequestPart String experience,
+            @RequestPart String man_day_value,
+            @RequestPart String remark,
+            @RequestPart byte[] guide_image,
+            @RequestPart byte[] guide_nic_image,
+            @RequestPart byte[] guide_id_image
     ){
         String guider_image= Base64.getEncoder().encodeToString(guide_image);
+        String guider_nic_image= Base64.getEncoder().encodeToString(guide_nic_image);
+        String guider_id_image= Base64.getEncoder().encodeToString(guide_id_image);
+
         GuiderDTO guiderDTO=new GuiderDTO();
         guiderDTO.setGuide_name(guide_name);
         guiderDTO.setAddress(guide_address);
         guiderDTO.setAge(age);
         guiderDTO.setContact_number(contact_number);
         guiderDTO.setGender(gender);
+        guiderDTO.setExperience(experience);
+        guiderDTO.setMan_day_value(Double.parseDouble(man_day_value));
+        guiderDTO.setRemark(remark);
         guiderDTO.setProfile_picture(guider_image);
+        guiderDTO.setGuide_nic_image(guider_nic_image);
+        guiderDTO.setGuide_id_image(guider_id_image);
 
         System.out.println(guiderDTO.getGuide_id());
-        return guideService.saveGuide(guiderDTO);
+return guideService.saveGuide(guiderDTO);
+        //return guideService.saveGuide(guiderDTO);
     }
     @GetMapping(value = "/{guide_id}",produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<GuiderDTO> getSelecterGuide(@PathVariable String guide_id){
@@ -63,22 +76,35 @@ public class GuideController {
 
     @PatchMapping(value = "/{guide_id}",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public String updateGuide(
-                    @PathVariable String guide_id,
+                     @PathVariable String guide_id,
                      @RequestPart String guide_name,
                      @RequestPart String guide_address,
-                     @RequestPart int age,
-                     @RequestPart int contact_number,
+                     @RequestPart String age,
+                     @RequestPart String contact_number,
                      @RequestPart String gender,
-                     @RequestPart byte[] guide_image){
+                     @RequestPart String experience,
+                     @RequestPart double man_day_value,
+                     @RequestPart String remark,
+                     @RequestPart byte[] guide_image,
+                     @RequestPart byte[] guide_nic_image,
+                     @RequestPart byte[] guide_id_image
+                    ){
 
         String guider_image= Base64.getEncoder().encodeToString(guide_image);
+        String guider_nic_image= Base64.getEncoder().encodeToString(guide_nic_image);
+        String guider_id_image= Base64.getEncoder().encodeToString(guide_id_image);
         GuiderDTO guiderDTO=new GuiderDTO();
         guiderDTO.setGuide_name(guide_name);
         guiderDTO.setAddress(guide_address);
         guiderDTO.setAge(age);
         guiderDTO.setContact_number(contact_number);
         guiderDTO.setGender(gender);
+        guiderDTO.setExperience(experience);
+        guiderDTO.setMan_day_value(man_day_value);
+        guiderDTO.setRemark(remark);
         guiderDTO.setProfile_picture(guider_image);
+        guiderDTO.setGuide_nic_image(guider_nic_image);
+        guiderDTO.setGuide_id_image(guider_id_image);
 
         System.out.println(guiderDTO.getGuide_id());
         guideService.updateGuide(guide_id,guiderDTO);
