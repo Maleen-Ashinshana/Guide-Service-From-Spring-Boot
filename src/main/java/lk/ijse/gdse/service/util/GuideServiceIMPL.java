@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -66,4 +68,17 @@ public class GuideServiceIMPL implements GuideService {
         }
         guideRepo.deleteById(guide_id);
     }
+
+    @Override
+    public List<GuiderDTO> getAllGuides() {
+        return  guideRepo.findAll().stream().map(guide-> converter.toGuiderDTO(guide)).collect(Collectors.toList());
+    }
+
+/*    @Override
+    public GuiderDTO getAll() {
+        *//*return converter.toGuiderDTO(guideRepo.findAll(converter.toGuiderEntity(g)));*//*
+        return  guideRepo.findAll().stream().map(guide->converter.toGuiderDTO(guide)).toList();
+    }*/
+
+
 }
