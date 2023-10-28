@@ -15,4 +15,5 @@ public interface GuideRepo extends CrudRepository<GuideEntity, String> {
 //    void deleteByGuide_id(String guide_id);
     /*List<GuiderDTO> f();*/
     List<GuideEntity> findAll();
+
 }

@@ -2,12 +2,11 @@ package lk.ijse.gdse.api;
 
 import jakarta.validation.Valid;
 import lk.ijse.gdse.dto.GuiderDTO;
+import lk.ijse.gdse.entity.GuideEntity;
 import lk.ijse.gdse.service.GuideService;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Base64;
@@ -41,14 +40,14 @@ public class GuideController {
         String guider_image = Base64.getEncoder().encodeToString(guide_image);
         String guider_nic_image = Base64.getEncoder().encodeToString(guide_nic_image);
         String guider_id_image = Base64.getEncoder().encodeToString(guide_id_image);
-
-        GuiderDTO guiderDTO = new GuiderDTO();
+        GuiderDTO guiderDTO=new GuiderDTO();
         guiderDTO.setGuide_name(guide_name);
         guiderDTO.setAddress(guide_address);
         guiderDTO.setAge(age);
         guiderDTO.setContact_number(contact_number);
         guiderDTO.setGender(gender);
         guiderDTO.setExperience(experience);
+
         guiderDTO.setMan_day_value(Double.parseDouble(man_day_value));
         guiderDTO.setRemark(remark);
         guiderDTO.setProfile_picture(guider_image);
@@ -132,4 +131,10 @@ public class GuideController {
 
     }*/
 
+    /*@GetMapping(value = "/{guide_name}")
+    public ResponseEntity<GuideEntity> listResponseEntity(@PathVariable String name){
+        List<GuideEntity> guiderDTOS=guideService.searchByName(name);
+        ResponseEntity<GuideEntity> guideEntityResponseEntity = new ResponseEntity<GuideEntity>((GuideEntity) guiderDTOS, HttpStatus.OK);
+        return guideEntityResponseEntity;
+    }*/
 }

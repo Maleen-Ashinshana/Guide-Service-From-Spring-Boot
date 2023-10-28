@@ -1,6 +1,8 @@
 package lk.ijse.gdse.service.util;
 
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lk.ijse.gdse.dto.GuiderDTO;
 import lk.ijse.gdse.entity.GuideEntity;
 import lk.ijse.gdse.exception.NotFoundException;
@@ -73,6 +75,28 @@ public class GuideServiceIMPL implements GuideService {
     public List<GuiderDTO> getAllGuides() {
         return  guideRepo.findAll().stream().map(guide-> converter.toGuiderDTO(guide)).collect(Collectors.toList());
     }
+
+/*    @Override
+    public @NotNull(message = "Guide name cannot be empty") @Pattern(regexp = "[A-Za-z ]+") String getGuideByName(String guide_name) {
+        List<GuideEntity> byId = guideRepo.findByName(guide_name);
+        *//*if (!byId.set()){
+            throw new NotFoundException( "Guide ID :"+guide_id + " Not Found");
+        }*//*
+        @NotNull(message = "Guide name cannot be empty") @Pattern(regexp = "[A-Za-z ]+") String guiderDTOs = converter.toGuiderDTO((GuideEntity) byId).getGuide_name();
+        return guiderDTOs;
+    }*/
+
+   /* @Override
+    public List<GuiderDTO> getGuideByName(String guide_name) {
+        List<GuideEntity> guides = guideRepo.findByName(guide_name);
+        List<GuiderDTO> guiderDTOs = converter.toGuiderDTO(guides);
+        return guiderDTOs;
+    }*/
+
+   /* @Override
+    public List<GuideEntity> searchByName(String name) {
+        return guideRepo.findByGuide_nameContainingIgnoreCase(name);
+    }*/
 
 /*    @Override
     public GuiderDTO getAll() {
