@@ -34,7 +34,7 @@ public class GuideServiceIMPL implements GuideService {
     @Override
     public GuiderDTO getGuide(String guide_id) {
         Optional<GuideEntity> byId = guideRepo.findById(guide_id);
-        if (!byId.isPresent()){
+        if (byId.isEmpty()){
             throw new NotFoundException( "Guide ID :"+guide_id + " Not Found");
         }
         return converter.toGuiderDTO(byId.get());
@@ -45,7 +45,7 @@ public class GuideServiceIMPL implements GuideService {
     @Override
     public void updateGuide(String guide_id,GuiderDTO guiderDTO) {
         Optional<GuideEntity> guideEntity=guideRepo.findById(guide_id);
-        if (!guideEntity.isPresent()){
+        if (guideEntity.isPresent()){
 
             throw  new NotFoundException("Guide ID :" +guide_id+"Not Found");
 
@@ -65,7 +65,7 @@ public class GuideServiceIMPL implements GuideService {
     @Override
     public void deleteGuide(String guide_id) {
         Optional<GuideEntity> byId = guideRepo.findById(guide_id);
-        if (!byId.isPresent()){
+        if (byId.isEmpty()){
             throw new NotFoundException("Guide ID : "+guide_id+"Not Found");
         }
         guideRepo.deleteById(guide_id);
