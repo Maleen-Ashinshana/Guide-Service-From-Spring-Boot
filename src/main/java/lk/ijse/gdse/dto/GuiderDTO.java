@@ -23,10 +23,13 @@ public class GuiderDTO {
     @Pattern(regexp = "[A-Za-z ]+")
     private String guide_name;
     @NotNull(message = "Guide Address cannot be empty")
+    @Pattern(regexp = "[A-Za-z 0-9]+")
     private String address;
     @NotNull(message = "Guide Age cannot be empty")
+    @Pattern(regexp = "^(0?[1-9]|[1-9][0-9])$", message = "Age must be a valid number between 1 and 99")
     private String age;
     @NotNull(message = "Guide Contact Number cannot be empty")
+    @Pattern(regexp = "^\\d{10}$", message = "Guide Contact Number must be a 10-digit number")
     private String contact_number;
     @NotNull(message = "Guide Gender cannot be empty")
     private String gender;
